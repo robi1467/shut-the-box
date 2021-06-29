@@ -52,6 +52,8 @@ def choose_number_to_drop(target_amount):
     while goal != 0:
         try:
             print("Available numbers: " + str(numbers_list) + " to get to " + str(target_amount))
+            if len(entered_numbers) != 0:
+                print("Numbers entered so far;" + str(entered_numbers))
             entered = int(input("Please enter a number that is available: "))
         except ValueError:
             print("Invalid Entry, please try again")
@@ -166,7 +168,7 @@ while keep_playing:
         total_score += score_game()
     average_score = total_score/games_played
     game_won = False
-    print("STATS:\n Games Played: " + str(games_played) + "\nGames Won: " + str(games_won) + "\nGames Lost: " + str(games_lost)
+    print("STATS:\nGames Played: " + str(games_played) + "\nGames Won: " + str(games_won) + "\nGames Lost: " + str(games_lost)
     + "\nAverage Score: " + str(average_score) + "\nTotal Score: " + str(total_score))
     keep_playing_input()
     
