@@ -72,30 +72,36 @@ def choose_number_to_drop(target_amount):
         numbers_list.remove(entered_numbers[i])
         i += 1
 
+
+# Check_lost_game is looking at every combination of numbers in the list numbers_list
+# Given the size of the array this is a relatively harmless approach
+# we only need to get to 4 combination since that is the most possible combination of numbers to have for the value
+# rolled
+
 def check_lost_game(rolled):
     value = True
-    if rolled not in numbers_list:
-        i = 0
-        while i < len(numbers_list):
-            j = i+1
-            while j< len(numbers_list):
-                if numbers_list[i] + numbers_list[j] == rolled:
+    if rolled in numbers_list:
+        return False
+
+    i = 0
+    while i < len(numbers_list):
+        j = i+1
+        while j< len(numbers_list) and i < 6:
+            if numbers_list[i] + numbers_list[j] == rolled:
+                return False
+            k = j+1
+            while k < len(numbers_list) and i < 4:
+                if numbers_list[i] + numbers_list[j] + numbers_list[k] == rolled:
                     return False
-                k = j+1
-                while k < len(numbers_list):
-                    if numbers_list[i] + numbers_list[j] + numbers_list[k] == rolled:
+                l = k+1
+                while l < len(numbers_list) and i < 3: # it is worthless to check combinations above i=3
+                    if numbers_list[i] + numbers_list[j] + numbers_list[k] + numbers_list[l] == rolled:
                         return False
-                    l = k+1
-                    while l < len(numbers_list):
-                        if numbers_list[i] + numbers_list[j] + numbers_list[k] + numbers_list[l] == rolled:
-                            return False
-                        l+=1
-                    k+=1
-                j+=1
+                    l += 1
+                k += 1
+            j += 1
                 
-            i +=1
-    else:
-        value = False
+        i += 1
     return value
 
 def end_game():
